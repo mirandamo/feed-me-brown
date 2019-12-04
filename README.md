@@ -1,5 +1,7 @@
 ## Feed Me README
 
+Deployed app here: https://feed-me-brown.herokuapp.com/
+
 # If Database breaks
 <!-- Try clearing cache -->
 $ heroku repo:purge_cache -a feed-me-brown
