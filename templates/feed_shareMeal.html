@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div id="unclaimed_meal" class="container pt-3 mb-3">
+  <h5 class="text-left text-white">Claimed Meals</h5>
+
+{% for meal in session['feeder_meals'] %}
+  {% if meal.swipe_claimed == True %}
+
+<!--Hidden until user accepts, claimed meals bg, gradient bg-->
+<!--Grey bg if unclaimed, red bg if accepted-->
+    <div class="col-md-12 p-0 bg-transparent">
+        <div class="card bg-danger border-1 mb-3">
+            <div class="card-body text-white ">
+                <h2 class="card-title">{{meal['meal_location']}}</h2>
+                <p class="card-text">Claimed but not confirmed</p>
+            </div>
+            <div class="card-body bg-light">
+                <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                <form class="" action="/feeder_confirm" method="post">
+                  <button name="confirm" type="submit" value={{meal['swipe_id']}} type="button" class="btn btn-danger launch-modal" data-toggle="modal" data-target="#confirmThanks">Confirm Swipe</button>
+                </form>
+            </div>
+        </div>
+  {% else %}
+    <div class="col-md-12 p-0 bg-transparent">
+        <div class="card bg-dark border-1 mb-3">
+            <div class="card-body text-white ">
+                <h2 class="card-title">{{meal['meal_location']}}</h2>
+                <p class="card-text">Not claimed yet</p>
+            </div>
+            <div class="card-body bg-light">
+                <p class="card-text">{{meal['time_end']}} hours remaining</p>
+            </div>
+        </div>
+  </div>
+{% endif %}
+{% endfor %}
+</div>
+
+<!--share meal button-->
+<div class="container pt-3 mb-3">
+<a href="/feed_details" class="btn btn-danger text-white mb-3">Share a Meal</a>
+
+<!--achievements block-->
+<!-- <div class="col-md-12 p-0 bg-transparent">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">Achievement</h5>
+            <p class="card-text">13 meals shared, $65 donated</p>
+        </div>
+    </div>
+</div> -->
+
+<!--Confirm Thanks Modal-->
+<div class="modal fade" id="confirmThanks" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="confirmThanks" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thank you!</h5>
+
+          <a href="/feed_shareMeal"><button type="button" type="submit">
+          <span aria-hidden="true">&times;</span>
+        </button></a>
+
+      </div>
+      <div class="modal-body">
+        You just donated $5.00 to Second Harvest FoodBank through Swipe Me In.
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

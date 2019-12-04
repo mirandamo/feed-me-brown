@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<title>Create Meal</title>
+<!-- Bootstrap -->
+<link href="css/bootstrap-4.3.1.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+
+<form method="POST" action="">
+  {% from "includes/_formhelpers.html" import render_field %}
+  <nav class="navbar navbar-dark bg-dark">
+      <div class="container"> <a class="btn btn-primary" href="/feed_shareMeal" role="button">Back</a> <a class="navbar-brand" href="#">Meal Details</a>
+          <button type="submit" class="btn btn-primary">Share</button>
+      </div>
+  </nav>
+<br><br>
+  <div class="form-group">
+    <h3>{{render_field(form.meal_location, class_="form-control")}}</h3>
+  </div>
+  <div class="form-group">
+    <h3>{{render_field(form.time_begin, class_="form-control")}}</h3>
+  </div>
+  <div class="form-group">
+    <h3>{{render_field(form.time_end, class_="form-control")}}</h3>
+  </div>
+  <div class="form-group">
+    <h3>{{render_field(form.intro_message, class_="form-control")}}</h3>
+  </div>
+</form>
+
+{% endblock %}

@@ -1,0 +1,365 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<!--TODO: Appear when meal claimed-->
+<div class="container pt-3 pb-3 mb-3">
+    {% if session['curr_meal'] != []%}
+    <h5 class="text-left">Claimed Meals</h5>
+    {% for meal in session['curr_meal'] %}
+    <div class="col-md-12 p-0">
+        <div class="card bg-danger border-1 mb-3">
+            <div class="card-body text-white ">
+                <h2 class="card-title">{{meal['meal_location']}}</h2>
+                <p class="card-text">{{meal['first_name']}}</p>
+            </div>
+            <div class="card-body bg-light">
+                <p class="card-text">{{meal['time_end']}} hours remaining</p>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+    {%endif%}
+</div>
+<div class="container">
+<h5 class="text-left">Explore</h5>
+<!--Ratty carousel-->
+<div class="container p-0 mb-5">
+    <h2 class="text-left">Ratty</h2>
+    {% if session['ratty'] == []%}
+    <h5 class="text-left">Currently no meals shared.</h5>
+    {% else %}
+
+<div id="rattyCar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+      {% for meal in session['ratty'] %}
+      {% if meal['first_card'] == True %}
+      <div class="carousel-item active">
+      {% else %}
+      <div class="carousel-item">
+      {% endif %}
+          <div class="col-md-12 p-0">
+            <div class="card border-1 mb-3">
+                <div class="card-body bg-warning">
+                    <h2 class="card-title">{{meal['first_name']}}</h2>
+                    <p class="card-text">Unclaimed</p>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                    <form class="" action="/eater_claim" method="post">
+                      <button name="claim" type="submit" value={{meal['swipe_id']}} class="btn btn-warning">Claim Meal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+  <div class="col-md-12 p-0">
+  <a class="carousel-control-prev" href="#rattyCar" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+</div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-next" href="#rattyCar" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+</div>
+{% endif %}
+</div>
+
+<!--Vdub carousel-->
+<div class="container p-0 mb-5">
+    <h2 class="text-left">V-Dub</h2>
+    {% if session['vdub'] == []%}
+    <h5 class="text-left">Currently no meals shared.</h5>
+    {% else %}
+
+    <div id="vdubCar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+      {% for meal in session['vdub'] %}
+      {% if meal['first_card'] == True %}
+      <div class="carousel-item active">
+      {% else %}
+      <div class="carousel-item">
+      {% endif %}
+          <div class="col-md-12 p-0">
+            <div class="card border-1 mb-3">
+                <div class="card-body bg-warning">
+                    <h2 class="card-title">{{meal['first_name']}}</h2>
+                    <p class="card-text">Unclaimed</p>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                    <form class="" action="/eater_claim" method="post">
+                      <button name="claim" type="submit" value={{meal['swipe_id']}} class="btn btn-warning">Claim Meal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+  </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-prev" href="#vdubCar" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+        </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-next" href="#vdubCar" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+            </div>
+</div>
+{% endif %}
+</div>
+
+<!--Andrews carousel-->
+<div class="container p-0 mb-5">
+    <h2 class="text-left">Andrews</h2>
+    {% if session['andrews'] == []%}
+    <h5 class="text-left">Currently no meals shared.</h5>
+    {% else %}
+
+    <div id="andrewsCar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+      {% for meal in session['andrews'] %}
+      {% if meal['first_card'] == True %}
+      <div class="carousel-item active">
+      {% else %}
+      <div class="carousel-item">
+      {% endif %}
+          <div class="col-md-12 p-0">
+            <div class="card border-1 mb-3">
+                <div class="card-body bg-warning">
+                    <h2 class="card-title">{{meal['first_name']}}</h2>
+                    <p class="card-text">Unclaimed</p>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                    <form class="" action="/eater_claim" method="post">
+                      <button name="claim" type="submit" value={{meal['swipe_id']}} class="btn btn-warning">Claim Meal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+  </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-prev" href="#andrewsCar" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+        </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-next" href="#andrewsCar" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+            </div>
+</div>
+{% endif %}
+</div>
+
+<!--Jo's-->
+<div class="container p-0 mb-5">
+    <h2 class="text-left">Jo's</h2>
+    {% if session['jos'] == []%}
+    <h5 class="text-left">Currently no meals shared.</h5>
+    {% else %}
+
+    <div id="josCar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+      {% for meal in session['jos'] %}
+      {% if meal['first_card'] == True %}
+      <div class="carousel-item active">
+      {% else %}
+      <div class="carousel-item">
+      {% endif %}
+          <div class="col-md-12 p-0">
+            <div class="card border-1 mb-3">
+                <div class="card-body bg-warning">
+                    <h2 class="card-title">{{meal['first_name']}}</h2>
+                    <p class="card-text">Unclaimed</p>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                    <form class="" action="/eater_claim" method="post">
+                      <button name="claim" type="submit" value={{meal['swipe_id']}} class="btn btn-warning">Claim Meal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+  </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-prev" href="#josCar" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+        </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-next" href="#josCar" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+            </div>
+</div>
+{% endif %}
+</div>
+
+<!--Blue Room-->
+<div class="container p-0 mb-5">
+    <h2 class="text-left">Blue Room</h2>
+    {% if session['blueroom'] == []%}
+    <h5 class="text-left">Currently no meals shared.</h5>
+    {% else %}
+
+    <div id="blueroomCar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+      {% for meal in session['blueroom'] %}
+      {% if meal['first_card'] == True %}
+      <div class="carousel-item active">
+      {% else %}
+      <div class="carousel-item">
+      {% endif %}
+          <div class="col-md-12 p-0">
+            <div class="card border-1 mb-3">
+                <div class="card-body bg-warning">
+                    <h2 class="card-title">{{meal['first_name']}}</h2>
+                    <p class="card-text">Unclaimed</p>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                    <form class="" action="/eater_claim" method="post">
+                      <button name="claim" type="submit" value={{meal['swipe_id']}} class="btn btn-warning">Claim Meal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+  </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-prev" href="#blueroomCar" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+        </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-next" href="#blueroomCar" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+            </div>
+</div>
+{% endif %}
+</div>
+
+<!--Ivy Room-->
+<div class="container p-0 mb-5">
+    <h2 class="text-left">Ivy Room</h2>
+    {% if session['ivyroom'] == []%}
+    <h5 class="text-left">Currently no meals shared.</h5>
+    {% else %}
+
+    <div id="ivyroomCar" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+      {% for meal in session['ivyroom'] %}
+      {% if meal['first_card'] == True %}
+      <div class="carousel-item active">
+      {% else %}
+      <div class="carousel-item">
+      {% endif %}
+          <div class="col-md-12 p-0">
+            <div class="card border-1 mb-3">
+                <div class="card-body bg-warning">
+                    <h2 class="card-title">{{meal['first_name']}}</h2>
+                    <p class="card-text">Unclaimed</p>
+                </div>
+                <div class="card-body bg-light">
+                    <p class="card-text">{{meal['time_end']}} hours remaining</p>
+                    <form class="" action="/eater_claim" method="post">
+                      <button name="claim" type="submit" value={{meal['swipe_id']}} class="btn btn-warning">Claim Meal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+
+
+  </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-prev" href="#ivyroomCar" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+        </div>
+        <div class="col-md-12 p-0">
+  <a class="carousel-control-next" href="#ivyroomCar" role="button" data-slide="next">
+    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+            </div>
+</div>
+{% endif %}
+</div>
+</div>
+
+<!--Test confirm payment-->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#confirmPay">Test Confirmation</button> -->
+
+
+<!-- Confirm Pay Modal -->
+<div class="modal fade" id="confirmPay" tabindex="-1" role="dialog" aria-labelledby="confirmPay" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmPayTitle">Confirm Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Confirm that $5.00 will be deducted from your account and donated to Second Harvest FoodBank.
+      </div>
+      <div class="modal-footer">
+        <a data-toggle="modal" data-dismiss="modal" href="#confirmThanks"><button type="button" class="btn btn-primary">Confirm</button></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Confirm Thanks Modal-->
+<div class="modal fade" id="confirmThanks" tabindex="-1" role="dialog" aria-labelledby="confirmThanks" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thank you!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        You just donated $5.00 to Second Harvest FoodBank through Swipe Me In.
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
